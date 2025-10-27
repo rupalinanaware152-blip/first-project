@@ -1,0 +1,127 @@
+<html>
+    <head>
+    <style>
+        table,th,td {
+            border : 1px solid black;
+                 
+        border-collapse: collapse;
+    }
+        <h1> Pricing Table</h1>
+        <table 
+        {
+             font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+        td, th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
+</style>
+</head>
+<body>
+    <h1> Pricing Table </h1>
+    <table class="center-table">
+        <tr>
+            <style>
+                th {
+                    background-color: rgba(91, 133, 136, 0.751);
+                }
+                td {
+                    background-color: rgb(136, 186, 201);
+                }
+               .tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  cursor: pointer;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 130px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+} 
+                </style>
+                <th>Basic </th>
+                <th> Pro (Featured)</th>
+                <th> Enterprise</th>
+            </tr>
+            <tr>
+                <td >
+
+                <div class ="tooltip">$9/mo
+                    <span class="tooltiptext"> Basic Plan suitable for individuals or small projects.</span>
+                </td>
+            <td>
+                <div class="tooltip">$29/mo
+      <span class="tooltiptext">Pro plan includes advanced features for growing teams.</span>
+            </td>
+            <td>
+                <div class="tooltip">$99/mo
+      <span class="tooltiptext">Enterprise plan offers full-scale support and resources.</span> 
+    </td>         
+          </tr>
+          <tr> 
+            <td> 
+                <div class="tooltip">5 Projects
+      <span class="tooltiptext">You can manage up to 5 projects in this plan.</span>
+</td>
+            <td> 
+                <div class="tooltip">50 Projects
+      <span class="tooltiptext">Manage up to 50 projects comfortably.</span>
+ </td>
+            <td> 
+                <div class="tooltip">Unlimited Projects
+      <span class="tooltiptext">No limit on projects in the Enterprise plan.</span>
+
+            </td>
+            </tr>
+            <tr> 
+                <td> 
+                    <div class="tooltip">5 GB Storage
+      <span class="tooltiptext">Limited cloud storage for files and assets.</span>
+                </td>
+                <td> 
+                    <div class="tooltip">50 GB Storage
+      <span class="tooltiptext">Generous storage space for teams.</span>
+                </td>
+                <td> 
+                    <div class="tooltip">500 GB Storage
+      <span class="tooltiptext">Massive storage for large organizations.</span>
+
+                </td>
+            </tr>
+            <tr>
+
+                <td> 
+                     <div class="tooltip">Email Support
+      <span class="tooltiptext">Support via email within 48 hours.</span>
+
+                </td>
+                <td> 
+                    <div class="tooltip">Priority Support
+      <span class="tooltiptext">Faster response for critical issues.</span>
+
+                </td>
+                <td> 
+                    <div class="tooltip">24/7 Dedicated Support
+      <span class="tooltiptext">Round-the-clock support with dedicated team.</span>
+
+                </td>
+            </tr>
+            </tr>
+        </table>
+    </body>
+</html>
