@@ -1,0 +1,174 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expandable Pricing Table</title>
+
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #f8fafc;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+
+  h1 {
+    color: #1e293b;
+  }
+
+  table {
+    width: 90%;
+    margin: 40px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 15px;
+    text-align: left;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease;
+  }
+
+  th {
+    background-color: #0f68c7ea;
+    color: white;
+  }
+
+  tr:hover td {
+    background-color: #f1f5f9;
+  }
+
+  /* === Expandable content section === */
+  .details {
+    display: none;
+    background-color: #f0f4f8;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+
+  .details td {
+    font-size: 0.95rem;
+    color: #444;
+    padding: 15px 20px;
+  }
+
+  /* === Expand/Collapse Button === */
+  .toggle-btn {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .toggle-btn:hover {
+    background-color: #1e40af;
+  }
+
+  /* === Animation for expanding === */
+  .show {
+    display: table-row;
+    animation: expand 0.4s ease-in-out;
+  }
+
+  @keyframes expand {
+    from {opacity: 0; transform: scaleY(0.9);}
+    to {opacity: 1; transform: scaleY(1);}
+  }
+
+  /* === Responsive Table === */
+  @media (max-width: 768px) {
+    table {
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 10px;
+    }
+  }
+</style>
+</head>
+
+<body>
+<h1>Pricing Table with Expandable Details</h1>
+
+<table>
+  <tr>
+    <th>Plan</th>
+    <th>Price</th>
+    <th>Projects</th>
+    <th>Storage</th>
+    <th>Support</th>
+    <th>More Info</th>
+  </tr>
+
+  <!-- Basic Plan -->
+  <tr>
+    <td>Basic</td>
+    <td>$9/mo</td>
+    <td>5 Projects</td>
+    <td>5 GB</td>
+    <td>Email Support</td>
+    <td><button class="toggle-btn" onclick="toggleDetails('details1')">View</button></td>
+  </tr>
+  <tr id="details1" class="details">
+    <td colspan="6">
+      The Basic plan is ideal for individuals or freelancers just starting out. 
+      It includes essential tools for small projects, 5 GB cloud storage, 
+      and standard email support.
+    </td>
+  </tr>
+
+  <!-- Pro Plan -->
+  <tr>
+    <td>Pro (Featured)</td>
+    <td>$29/mo</td>
+    <td>50 Projects</td>
+    <td>50 GB</td>
+    <td>Priority Support</td>
+    <td><button class="toggle-btn" onclick="toggleDetails('details2')">View</button></td>
+  </tr>
+  <tr id="details2" class="details">
+    <td colspan="6">
+      The Pro plan is best for small teams. It offers advanced collaboration tools, 
+      50 GB of storage, and faster response times through priority support.
+    </td>
+  </tr>
+
+  <!-- Enterprise Plan -->
+  <tr>
+    <td>Enterprise</td>
+    <td>$99/mo</td>
+    <td>Unlimited Projects</td>
+    <td>500 GB</td>
+    <td>24/7 Dedicated Support</td>
+    <td><button class="toggle-btn" onclick="toggleDetails('details3')">View</button></td>
+  </tr>
+  <tr id="details3" class="details">
+    <td colspan="6">
+      The Enterprise plan is built for large organizations. It provides unlimited project capacity, 
+      enhanced security, 24/7 dedicated technical support, and premium integrations.
+    </td>
+  </tr>
+</table>
+
+<script>
+  function toggleDetails(id) {
+    const row = document.getElementById(id);
+    row.classList.toggle('show');
+  }
+</script>
+
+</body>
+</html>
+
+   
+   
