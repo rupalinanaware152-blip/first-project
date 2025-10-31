@@ -1,0 +1,219 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expandable Pricing Table</title>
+
+<style>
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #f8fafc;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+
+  h1 {
+    color: #1e293b;
+  }
+
+  table {
+    width: 90%;
+    margin: 40px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.133);
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 15px;
+    text-align: left;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease;
+  }
+
+  th {
+    background-color: #e372d4;
+    color: white;
+  }
+
+  tr:hover td {
+    background-color: #f1f5f9;
+  }
+
+  /* === Expandable content section === */
+  .details {
+    display: none;
+    background-color: #f0f4f8;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+
+  .details td {
+    font-size: 0.95rem;
+    color: #444;
+    padding: 15px 20px;
+  }
+
+  /* === Expand/Collapse Button === */
+  .toggle-btn {
+    background-color: #eb25cd;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .toggle-btn:hover {
+    background-color: #a01eaf;
+  }
+
+  /* === Animation for expanding === */
+  .show {
+    display: table-row;
+    animation: expand 0.4s ease-in-out;
+  }
+
+  @keyframes expand {
+    from {opacity: 0; transform: scaleY(0.9);}
+    to {opacity: 1; transform: scaleY(1);}
+  }
+
+  /* === Responsive Table === */
+  @media (max-width: 768px) {
+    table {
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 10px;
+    }
+  }
+</style>
+</head>
+<body>
+<h1>Dynamic Pricing Table</h1>
+
+<!-- === User Controls for Price Calculation === -->
+<div class="controls">
+  <label for="plan">Select Plan:</label>
+  <select id="plan" onchange="calculateTotal()">
+    <option value="9">Basic - $9/mo</option>
+    <option value="29">Pro - $29/mo</option>
+    <option value="99">Enterprise - $99/mo</option>
+  </select>
+
+  <label for="billing">Billing Cycle:</label>
+  <select id="billing" onchange="calculateTotal()">
+    <option value="monthly">Monthly</option>
+    <option value="yearly">Yearly (10% off)</option>
+  </select>
+
+  <label>
+    <input type="checkbox" id="extraStorage" onchange="calculateTotal()"> Add Extra 50GB (+$5)
+  </label>
+
+  <h2 id="totalPrice">Total: $9/month</h2>
+</div>
+
+<h1>Pricing Table with Expandable Details</h1>
+
+<table>
+  <tr>
+    <th>Plan</th>
+    <th>Price</th>
+    <th>Projects</th>
+    <th>Storage</th>
+    <th>Support</th>
+    <th>More Info</th>
+  </tr>
+
+  <!-- Basic Plan -->
+  <tr>
+    <td>Basic</td>
+    <td>$9/mo</td>
+    <td>5 Projects</td>
+    <td>5 GB</td>
+    <td>Email Support</td>
+    <td><button class="toggle-btn" onclick="toggleDetails('details1')">View</button></td>
+  </tr>
+  <tr id="details1" class="details">
+    <td colspan="6">
+      The Basic plan is ideal for individuals or freelancers just starting out. 
+      It includes essential tools for small projects, 5 GB cloud storage, 
+      and standard email support.
+    </td>
+  </tr>
+
+  <!-- Pro Plan -->
+  <tr>
+    <td>Pro (Featured)</td>
+    <td>$29/mo</td>
+    <td>50 Projects</td>
+    <td>50 GB</td>
+    <td>Priority Support</td>
+    <td><button class="toggle-btn" onclick="toggleDetails('details2')">View</button></td>
+  </tr>
+  <tr id="details2" class="details">
+    <td colspan="6">
+      The Pro plan is best for small teams. It offers advanced collaboration tools, 
+      50 GB of storage, and faster response times through priority support.
+    </td>
+  </tr>
+
+  <!-- Enterprise Plan -->
+  <tr>
+    <td>Enterprise</td>
+    <td>$99/mo</td>
+    <td>Unlimited Projects</td>
+    <td>500 GB</td>
+    <td>24/7 Dedicated Support</td>
+    <td><button class="toggle-btn" onclick="toggleDetails('details3')">View</button></td>
+  </tr>
+  <tr id="details3" class="details">
+    <td colspan="6">
+      The Enterprise plan is built for large organizations. It provides unlimited project capacity, 
+      enhanced security, 24/7 dedicated technical support, and premium integrations.
+    </td>
+  </tr>
+</table>
+
+<script>
+  function toggleDetails(id) {
+    const row = document.getElementById(id);
+    row.classList.toggle('show');
+  }
+
+  function calculateTotal() {
+    let plan = parseFloat(document.getElementById("plan").value);
+    let billing = document.getElementById("billing").value;
+    let extraStorage = document.getElementById("extraStorage").checked;
+
+    let total = plan;
+
+    // Add extra storage if selected
+    if (extraStorage) total += 5;
+
+    // Apply yearly discount (10% off)
+    if (billing === "yearly") {
+      total = total * 12 * 0.9;
+      document.getElementById("totalPrice").textContent = `Total: $${total.toFixed(2)}/year`;
+    } else {
+      document.getElementById("totalPrice").textContent = `Total: $${total.toFixed(2)}/month`;
+    }
+  }
+</script>
+
+
+</script>
+
+</body>
+</html>
+
+   
+   
