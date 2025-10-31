@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Pricing Table</title>
+
+<style>
+  /* === Base Styles === */
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(to right, #f9fafc, #eef2f3);
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+
+  h1 {
+    color: #1e293b;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #64748b;
+    margin-bottom: 30px;
+  }
+
+  /* === Pricing Controls === */
+  .controls {
+    background: #fff;
+    display: inline-block;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .controls:hover {
+    transform: scale(1.02);
+  }
+
+  select, input[type="checkbox"] {
+    margin: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  select:focus {
+    border-color: #e372d4;
+    box-shadow: 0 0 8px rgba(227,114,212,0.4);
+  }
+
+  #totalPrice {
+    margin-top: 20px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #eb25cd;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  #totalPrice:hover {
+    transform: scale(1.05);
+    color: #a01eaf;
+  }
+
+  /* === Pricing Table === */
+  table {
+    width: 90%;
+    margin: 40px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: left;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  th {
+    background-color: #e372d4;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  tr:hover td {
+    background-color: #f1f5f9;
+    transform: scale(1.01);
+  }
+
+  /* === Toggle Button Animation === */
+  .toggle-btn {
+    background-color: #eb25cd;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .toggle-btn:hover {
+    background-color: #a01eaf;
+    transform: translateY(-2px);
+  }
+
+  /* === Expandable Details === */
+  .details {
+    display: none;
+    background-color: #f8f9fc;
+    transition: all 0.4s ease-in-out;
+  }
+
+  .show {
+    display: table-row;
+    animation: expand 0.4s ease-in-out;
+  }
+
+  @keyframes expand {
+    from {opacity: 0; transform: scaleY(0.9);}
+    to {opacity: 1; transform: scaleY(1);}
+  }
+
+  /* === Responsive Design === */
+  @media (max-width: 768px) {
+    table {
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 10px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Interactive Pricing Plans</h1>
+<p>Select your plan and explore features with smooth animations.</p>
+
+<!-- Pricing Controls -->
+<div class="controls">
+  <label for="plan">Select Plan:</label>
+  <select id="plan" onchange="calculateTotal()">
+    <option value="9">Basic - $9/mo</option>
+    <option value="29">Pro - $29/mo</option>
+    <option value="99">Enterprise - $99/mo</option>
+  </select>
+
+  <label for="billing">Billing Cycle:</label>
+  <select id="billing" onchange="calculateTotal()">
+    <option value="monthly">Monthly</option>
+    <option value="yearly">Yearly (10% off)</option>
+  </select>
+
+  <label><input type="checkbox" id="extraStorage" onchange="calculateTotal()"> Add Extra 50GB (+$5)</label>
+
+  <h2 id="totalPrice">Total: $9/month</h2>
+</div>
+
+<!-- Pricing Table -->
+<table>
+  <tr>
+    <th>Plan</th>
+    <th>Price</th>
+    <th>Projects</th>
+    <th>Storage</th>
+    <th>Support</th>
+    <th>More Info</th>
+  </tr>
+
+  <tr>
+    <td>Basic</td>
+    <td>$9/mo</td>
+    <td>5 Projects</td>
+    <td>5 GB</td>
+    <td>Email Support</td>
+    <td><button class="toggle-btn" onclick="toggleDetails('details1', this)">View</button></td>
+  </tr>
+  <tr id="details1" class="details">
+    <td colspan="6">The Basic plan is ideal for individuals or freelancers just starting out. It includes essential tools for small projects, 5 GB cloud storage, and standard email support.</td>
+  </tr>
+
+  <tr>
+    <td>Pro</td>
+    <td>$29/mo</td>
+    <td>50 Projects</td>
+    <td>50 GB</td>
+    <td>Priority Support</td>
+    <td><button class="toggle-btn" onclick="toggleDetails('details2', this)">View</button></td>
+  </tr>
+  <tr id="details2" class="details">
+    <td colspan="6">The Pro plan is best for small teams. It offers advanced collaboration tools, 50 GB of storage, and faster response times through priority support.</td>
+  </tr>
+
+  <tr>
+    <td>Enterprise</td>
+    <td>$99/mo</td>
+    <td>Unlimited</td>
+    <td>500 GB</td>
+    <td>24/7 Dedicated Support</td>
+    <td><button class="toggle-btn" onclick="toggleDetails('details3', this)">View</button></td>
+  </tr>
+  <tr id="details3" class="details">
+    <td colspan="6">The Enterprise plan is built for large organizations. It provides unlimited project capacity, enhanced security, 24/7 dedicated technical support, and premium integrations.</td>
+  </tr>
+</table>
+
+<script>
+  // Function to toggle expandable details
+  function toggleDetails(id, button) {
+    const row = document.getElementById(id);
+    row.classList.toggle('show');
+    button.textContent = row.classList.contains('show') ? 'Hide' : 'View';
+  }
+
+  // Function to calculate total dynamically
+  function calculateTotal() {
+    let plan = parseFloat(document.getElementById("plan").value);
+    let billing = document.getElementById("billing").value;
+    let extraStorage = document.getElementById("extraStorage").checked;
+
+    let total = plan;
+    if (extraStorage) total += 5;
+
+    if (billing === "yearly") {
+      total = total * 12 * 0.9;
+      document.getElementById("totalPrice").textContent = `Total: $${total.toFixed(2)}/year`;
+    } else {
+      document.getElementById("totalPrice").textContent = `Total: $${total.toFixed(2)}/month`;
+    }
+  }
+</script>
+
+</body>
+</html>
